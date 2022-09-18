@@ -15,10 +15,11 @@ try {
 
     guild.bans.fetch().then(async (i) => {
         const ids = i.map((u) => u.user.id);
-        guild.bans.remove(ids, 'Your Reason Here').then(async (u) => {
-            console.log(`Unbanned: ${u.tag}`);
+          ids.forEach(async (id) => {
+            await guild.members.unban(id, 'Your Reason Here!').then(async (u) => {
+                console.log(`Unbanned: ${u.tag}`);
+            });
         })
-
     })
 
 } catch (error) {
